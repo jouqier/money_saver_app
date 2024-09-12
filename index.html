@@ -1,14 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Мое мини-приложение</title>
+    <title>Мое мини-приложение в Telegram</title>
   </head>
   <body>
     <h1>Привет, это мини-приложение в Telegram!</h1>
+    <button id="closeButton">Закрыть приложение</button>
+
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
-      // Здесь мы будем взаимодействовать с Telegram API
+      // Убедимся, что Telegram Web App готово
       Telegram.WebApp.ready();
+
+      // Закрытие мини-приложения по кнопке
+      document.getElementById('closeButton').addEventListener('click', function() {
+        Telegram.WebApp.close();
+      });
+
+      // Можно также получать данные о пользователе Telegram
+      const user = Telegram.WebApp.initDataUnsafe.user;
+      if (user) {
+        document.body.insertAdjacentHTML('beforeend', `<p>Привет, ${user.first_name}!</p>`);
+      }
     </script>
   </body>
 </html>
